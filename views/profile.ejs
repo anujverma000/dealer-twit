@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+	<title>Dealer Twit</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="static/style.css">
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+	<script type="text/javascript" src="http://momentjs.com/downloads/moment.js"></script>
+	<script src="static/d3.min.js"></script>
+    <script src="static/topojson.min.js"></script>
+    <script src="static/datamaps.all.min.js"></script>
+    <script src="static/datamaps.fading-bubbles.js"></script>
+    <script src="static/sentimentbar-plugin.js"></script>
+    <script src="static/map.js"></script>
+    <script src="static/script.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="nav">
+		<a href="/profile"><img src="static/logo.png" height="35px" style="padding: 5px; margin-top: 10px; margin-left: 70px;"></a>
+		<ul>
+			<li class="selected"><a href="/profile">Home</a></li>
+			<li><a href="/saved">Saved Tweets</a></li>
+			<li><a href="/setup">Setup Serach Terms</a></li>
+			<li><a href="/logout">Logout</a></li>
+		</ul>
+	</div>
+	<div style="text-align: right; height: 0;">
+		<div class="sentiment-bar"></div>
+		<i class='fa fa-heart' style="position: relative; top: 12px; left: -20px;"></i>
+	</div>
+	<div class="top-panel">
+		<div class="left-panel">
+			<div class="left-top"></div>
+			<div class="left-bottom">
+				<div class="profile_photo">
+					<img src='https://twitter.com/<%=user.twitter.username%>/profile_image?size=original' class="img-circle profile-pic" width="125px">		
+				</div>
+				<div class="profile_username">	
+					<%= user.twitter.displayName %>
+					<br>
+					<span class="profile_username-info"><span class="fa fa-twitter"></span> @<%= user.twitter.username %></span>
+				</div>
+			</div>
+			
+		</div>
+		<div class="right-panel">
+			<div class="right-top">
+				<div id="map-container"></div>
+			</div>
+		</div>
+	</div>
+	<div class="main-container">
+		<div class="left-panel">
+			<div class="stats">
+				<div class="stat">
+					<div class="total count">0</div>
+					<div class="label">TOTAL TWEETS</div>
+				</div>
+				<div class="stat">
+					<div class="positive count">0</div>
+					<div class="label">POSITIVE TWEETS</div>
+				</div>
+				<div class="stat">
+					<div class="negative count">0</div>
+					<div class="label">NEGATIVE TWEETS</div>
+				</div>
+				<div class="stat">
+					<div class="netural count">0</div>
+					<div class="label">NETURAL TWEETS</div>
+				</div>
+			</div>
+		</div>
+		<div class="right-panel tweets-panel">
+			<div class="heading">
+				<div style="float:left;"><span class="fa fa-twitter"></span> Live Twitter Feed</div>
+				<div class="filters">
+					<span class="filter-negative" onclick="hideTweets('negative')"><i class="thumbs fa fa-frown-o  fa-2"></i> Negative</span>
+					<span class="filter-netural" onclick="hideTweets('netural')"><i class="thumbs fa fa-circle-o  fa-2"></i> Netural</span>
+					<span class="filter-positive" onclick="hideTweets('positive')"><i class="thumbs fa fa-smile-o  fa-2"></i> Positive</span>
+				</div>
+			</div>
+			<div id="tweets"></div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
