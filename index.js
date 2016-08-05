@@ -26,4 +26,4 @@ app.use(flash());
 require('./app/routes.js')(app, passport);
 
 app.listen(port);
-console.log('server is on : http://localhost' + port);
+console.log('server is on : http://localhost:' + port);
