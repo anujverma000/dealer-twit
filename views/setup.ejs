@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<title>Dealer Twit</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="static/style.css">
+    <script src="static/script.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="nav">
+		<a href="/profile"><img src="static/logo.png" height="35px" style="padding: 5px; margin-top: 10px; margin-left: 70px;"></a>
+		<ul>
+			<li><a href="/profile">Home</a></li>
+			<li><a href="/saved">Saved Tweets</a></li>
+			<li class="selected"><a href="/setup">Setup Search Terms</a></li>
+			<li><a href="/logout">Logout</a></li>
+		</ul>
+	</div>
+
+	<div class="top-panel">
+		<div class="left-panel">
+			<div class="left-top"></div>
+			<div class="left-bottom">
+				<div class="profile_photo">
+					<img src='https://twitter.com/<%=user.twitter.username%>/profile_image?size=original' class="img-circle profile-pic" width="125px">
+				</div>
+				<div class="profile_username">
+					<%= user.twitter.displayName %>
+					<br>
+					<span class="profile_username-info"><span class="fa fa-twitter"></span> @<%= user.twitter.username %></span>
+				</div>
+			</div>
+
+		</div>
+		<div class="right-panel">
+			<div class="right-top">
+				<div style="text-align: center;" class="page-heading">
+					Dealership Search Terms
+				</div>
+				<div style="text-align: center;">
+					<input type="text" id="searchTerm" class="textfield">
+					<input type="button" value="Save" class="btn btn-default button" onclick="saveSetup()">
+				</div>
+				<div class="heading-inner new-items" style="display:none;"> Newly Added Terms:</div>
+				<div id="searchterms"></div>
+				<div class="heading-inner"> Previously Added Terms:</div>
+				<div>
+					<% for(var i=0; i<setupData.length; i++) {%>
+						<span id="termData" style="visibility:hidden"></span>
+						<span class="term" id="<%=setupData[i]._id %>"><%= setupData[i].search %>
+							<a href="#" class="closeBtn" id="<%=setupData[i]._id %>" onclick="deleteSetup(this.id)"></a>
+						</span>
+					<% } %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>
